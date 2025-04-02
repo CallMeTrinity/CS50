@@ -1,0 +1,13 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "lldb",
+      "request": "launch",
+      "args": [],
+      "cwd": "/Users/antonin.p/Code/CS50/lesson01/pset1/cash",
+      "program": "/Users/antonin.p/Code/CS50/lesson01/pset1/cash/build/Debug/outDebug"
+    }
+  ]
+}

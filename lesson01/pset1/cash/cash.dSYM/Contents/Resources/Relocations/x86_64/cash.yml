@@ -1,0 +1,5 @@
+---
+triple:          'x86_64-apple-darwin'
+binary-path:     '/Users/antonin.p/Code/CS50/lesson01/pset1/cash/cash'
+relocations:     []
+...
