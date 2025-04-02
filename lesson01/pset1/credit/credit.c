@@ -5,25 +5,26 @@ long get_long(char prompt[255]);
 char *get_card_type(long n);
 long get_first_digits(long n);
 bool luhn_alg(long n);
+int length_of_card_number(long n);
 
 int main(void)
 {
     long credit_card_number;
     bool luhn;
-    do
+    credit_card_number = get_long("Credit card number : ");
+    char *card_type = get_card_type(credit_card_number);
+    printf("%s\n", card_type);
+}
+
+int length_of_card_number(long n)
+{
+    int counter = 0;
+    while (n >= 1)
     {
-        credit_card_number = get_long("Credit card number : ");
-        luhn = luhn_alg(credit_card_number);
-    } while (!luhn);
-    if (luhn)
-    {
-        char *card_type = get_card_type(credit_card_number);
-        printf("%s\n", card_type);
+        n /= 10;
+        counter++;
     }
-    else
-    {
-        printf("Invalid credit card number");
-    }
+    return counter;
 }
 
 long get_long(char prompt[255])
@@ -43,22 +44,22 @@ char *get_card_type(long n)
     char *c;
 
     long first_digits = get_first_digits(n);
-
-    if (first_digits == 34 || first_digits == 37)
+    int l = length_of_card_number(n);
+    c = "INVALID";
+    if (luhn_alg(n))
     {
-        c = "AMEX";
-    }
-    else if (first_digits >= 51 && first_digits <= 55)
-    {
-        c = "MASTERCARD";
-    }
-    else if (first_digits / 10 == 4)
-    {
-        c = "VISA";
-    }
-    else
-    {
-        c = "INVALID";
+        if ((first_digits == 34 || first_digits == 37) && l == 15)
+        {
+            c = "AMEX";
+        }
+        else if ((first_digits >= 51 && first_digits <= 55) && l == 16)
+        {
+            c = "MASTERCARD";
+        }
+        else if ((first_digits / 10 == 4) && (l == 13 || l == 16))
+        {
+            c = "VISA";
+        }
     }
     return c;
 }
@@ -76,32 +77,28 @@ bool luhn_alg(long n)
 {
     int doubled_digits = 0;
     int summed_digits = 0;
-    long iterator_1 = n;
-    long iterator_2 = n;
-    n /= 10;
+
+    int pos = 0;
     while (n >= 1)
     {
-        iterator_1 = n;
-        iterator_1 %= 10;
-        int doubled = iterator_1 * 2;
-        if (doubled > 10)
+        if (pos % 2 == 0)
         {
-            doubled_digits += doubled % 10 + doubled / 10;
+            summed_digits += n % 10;
         }
         else
         {
-            doubled_digits += iterator_1 * 2;
+            int doubled = n % 10 * 2;
+            if (doubled >= 10)
+            {
+                doubled_digits += doubled % 10 + doubled / 10;
+            }
+            else
+            {
+                doubled_digits += doubled;
+            }
         }
-        n /= 100;
+        pos++;
+        n /= 10;
     }
-    while (iterator_2 >= 1)
-    {
-        summed_digits += iterator_2 % 10;
-        iterator_2 /= 100;
-    }
-    if ((summed_digits + doubled_digits) % 10 == 0)
-    {
-        return 1;
-    }
-    return 0;
+    return (summed_digits + doubled_digits) % 10 == 0;
 }
