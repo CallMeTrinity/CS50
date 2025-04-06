@@ -3,27 +3,21 @@
 #include <string.h>
 #include <ctype.h>
 
-const int SCORES_DATA[26] = {1, 3, 3, 2, 1, 4, 2, 4, 1, 8, 5, 1, 3, 1, 1, 3, 10, 1, 1, 1, 1, 4, 8, 4, 10};
+int compute_score(string word);
 
-const int number_player = 2;
+const int SCORES_DATA[26] = {1, 3, 3, 2, 1, 4, 2, 4, 1, 8, 5, 1, 3, 1, 1, 3, 10, 1, 1, 1, 1, 4, 8, 4, 10};
+const int N = 2;
+
 int main(void)
 {
 
-    string inputs[number_player];
+    string inputs[N];
     inputs[0] = get_string("player 1 : ");
     inputs[1] = get_string("player 2 : ");
-    int scores[2];
-    for (int i = 0; i < number_player; i++)
+    int scores[N];
+    for (int i = 0; i < N; i++)
     {
-        scores[i] = 0;
-        for (int j = 0, lenght = strlen(inputs[i]); j < lenght; j++)
-        {
-            inputs[i][j] = tolower(inputs[i][j]);
-            if (inputs[i][j] >= 96 && inputs[i][j] <= 122)
-            {
-                scores[i] += SCORES_DATA[inputs[i][j] - 97];
-            }
-        }
+        scores[i] = compute_score(inputs[i]);
     }
     if (scores[0] > scores[1])
     {
@@ -39,4 +33,19 @@ int main(void)
     }
 
     return 0;
+}
+
+int compute_score(string word)
+{
+    int score = 0;
+    for (int i = 0, length = strlen(word); i < length; i++)
+    {
+        word[i] = tolower(word[i]);
+        if (isalpha(word[i]))
+        {
+            score += SCORES_DATA[word[i] - 97];
+        }
+    }
+
+    return score;
 }
