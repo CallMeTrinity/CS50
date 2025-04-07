@@ -4,8 +4,8 @@
 #include <ctype.h>
 #include <stdlib.h>
 
-int convert_to_int(string s);
-string cipher(string p, int k);
+long convert_to_lng(string s);
+string cipher(string p, long k);
 
 int main(int argc, string argv[])
 {
@@ -23,29 +23,35 @@ int main(int argc, string argv[])
         }
     }
 
-    long key = convert_to_int(argv[1]);
+    long key = convert_to_lng(argv[1]);
     string p = get_string("Plain text :  ");
     string c = cipher(p, key);
     printf("Cipher text :  %s\n", c);
+
+    free(c);
 }
 
-int convert_to_int(string s)
+long convert_to_lng(string s)
 {
-    return (int)strtol(s, (char **)NULL, 10) % 26;
+    return strtol(s, (char **)NULL, 10) % 26;
 }
 
-string cipher(string p, int k)
+string cipher(string p, long k)
 {
     int l = strlen(p);
     char *c = malloc(l + 1);
     for (int i = 0; i < l; i++)
     {
-        c[i] = p[i] + k;
-        while ((islower(p[i]) && c[i] > 122) || (isupper(p[i]) && c[i] > 90))
+        if (isalpha(p[i]))
         {
-            c[i] -= 26;
+            char base = islower(p[i]) ? 'a' : 'A';
+            c[i] = (p[i] - base + k) % 26 + base;
         }
-        c[l] = '\0';
+        else
+        {
+            c[i] = p[i];
+        }
     }
+    c[l] = '\0';
     return c;
 }
