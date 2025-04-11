@@ -1,0 +1,5 @@
+---
+triple:          'x86_64-apple-darwin'
+binary-path:     '/Users/antonin.p/Code/CS50/lesson02/pset2/substitution/substitution'
+relocations:     []
+...

@@ -6,8 +6,8 @@
       "type": "lldb",
       "request": "launch",
       "args": [],
-      "cwd": "/Users/antonin.p/Code/CS50/lesson02/pset2/readability",
-      "program": "/Users/antonin.p/Code/CS50/lesson02/pset2/readability/build/Debug/outDebug"
+      "cwd": "/Users/antonin.p/Code/CS50/lesson02/pset2/substitution",
+      "program": "/Users/antonin.p/Code/CS50/lesson02/pset2/substitution/build/Debug/outDebug"
     }
   ]
 }
