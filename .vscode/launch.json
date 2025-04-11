@@ -6,8 +6,8 @@
       "type": "lldb",
       "request": "launch",
       "args": [],
-      "cwd": "/Users/antonin.p/Code/CS50/lesson01/pset1/cash",
-      "program": "/Users/antonin.p/Code/CS50/lesson01/pset1/cash/build/Debug/outDebug"
+      "cwd": "/Users/antonin.p/Code/CS50/lesson02/pset2/substitution",
+      "program": "/Users/antonin.p/Code/CS50/lesson02/pset2/substitution/build/Debug/outDebug"
     }
   ]
 }
