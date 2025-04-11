@@ -29,6 +29,7 @@ int main(int argc, string argv[])
     printf("Cipher text :  %s\n", c);
 
     free(c);
+    return 0;
 }
 
 long convert_to_lng(string s)

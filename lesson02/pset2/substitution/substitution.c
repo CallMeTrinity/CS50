@@ -14,7 +14,7 @@ int main(int argc, string argv[])
 {
     if (argc != 2)
     {
-        printf("Usage: ./subsitution KEY\n");
+        printf("Usage: ./substitution KEY\n");
         return 1;
     }
     else if (!isAlpha(argv[1]))
@@ -35,7 +35,9 @@ int main(int argc, string argv[])
 
     string key = argv[1];
     string plain_text = get_string("plaintext : ");
-    printf("ciphertext : %s\n", cipher(plain_text, key));
+    string c = cipher(plain_text, key);
+    printf("ciphertext : %s\n", c);
+    free(c);
     return 0;
 }
 
@@ -115,7 +117,7 @@ bool is_in_string(string s, char c)
     int l = (int)strlen(s);
     for (int i = 0; i < l; i++)
     {
-        if (c == s[i])
+        if (toupper(c) == toupper(s[i]))
         {
             return true;
             break;
