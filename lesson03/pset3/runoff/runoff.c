@@ -88,38 +88,39 @@ int main(int argc, string argv[])
         // Calculate votes given remaining candidates
         tabulate();
 
-        // Check if election has been won
-        bool won = print_winner();
-        if (won)
-        {
-            break;
-        }
+        break;
+        //     // Check if election has been won
+        //     bool won = print_winner();
+        //     if (won)
+        //     {
+        //         break;
+        //     }
 
-        // Eliminate last-place candidates
-        int min = find_min();
-        bool tie = is_tie(min);
+        //     // Eliminate last-place candidates
+        //     int min = find_min();
+        //     bool tie = is_tie(min);
 
-        // If tie, everyone wins
-        if (tie)
-        {
-            for (int i = 0; i < candidate_count; i++)
-            {
-                if (!candidates[i].eliminated)
-                {
-                    printf("%s\n", candidates[i].name);
-                }
-            }
-            break;
-        }
+        //     // If tie, everyone wins
+        //     if (tie)
+        //     {
+        //         for (int i = 0; i < candidate_count; i++)
+        //         {
+        //             if (!candidates[i].eliminated)
+        //             {
+        //                 printf("%s\n", candidates[i].name);
+        //             }
+        //         }
+        //         break;
+        //     }
 
-        // Eliminate anyone with minimum number of votes
-        eliminate(min);
+        //     // Eliminate anyone with minimum number of votes
+        //     eliminate(min);
 
-        // Reset vote counts back to zero
-        for (int i = 0; i < candidate_count; i++)
-        {
-            candidates[i].votes = 0;
-        }
+        //     // Reset vote counts back to zero
+        //     for (int i = 0; i < candidate_count; i++)
+        //     {
+        //         candidates[i].votes = 0;
+        //     }
     }
     return 0;
 }
@@ -142,7 +143,23 @@ bool vote(int voter, int rank, string name)
 // Tabulate votes for non-eliminated candidates
 void tabulate(void)
 {
-    // TODO
+    for (int i = 0; i < voter_count; i++)
+    {
+        for (int j = 0; j < candidate_count; j++)
+        {
+            int index = preferences[i][j];
+            if (!candidates[index].eliminated)
+            {
+                candidates[index].votes++;
+                printf("candidate %s in if %i = %i \n", candidates[index].name, j, candidates[index].votes);
+                break;
+            }
+
+            printf("voter : %i for candidate %i = %i \n", i, j, preferences[i][j]);
+            printf("candidate %i in if %i = %i \n", index, j, candidates[index].votes);
+        }
+    }
+
     return;
 }
 
